@@ -11,22 +11,22 @@ package(
     default_visibility = ["//visibility:public"],
 )
 
-mali_bifrost_module(name = "gpu_bifrost", kernel_build = ":oppen")
+mali_bifrost_module(name = "gpu_bifrost", kernel_build = ":yuna")
 
-media_modules_module(name = "media", kernel_build = ":oppen")
+media_modules_module(name = "media", kernel_build = ":yuna")
 
-rtl8822cs_module(name = "wlan_rtl8822cs", kernel_build = ":oppen")
+rtl8822cs_module(name = "wlan_rtl8822cs", kernel_build = ":yuna")
 
 amlogic_kernel_platform(
-    name = "oppen",
+    name = "yuna",
     dtb_outs = [
-        "s4_s905y4_ap222_drm.dtb",
+        "dv9192_s4_s905y4_ap222_drm.dtb",
         "android_overlay_dt.dtbo",
     ],
     module_outs = [m for m in TARGET_MODULES + COMMON_DRIVERS_MODULES + SYSTEM_DLKM_MODULES if m not in MODULES_OUT_REMOVE],
     gki_modules_remove = GKI_MODULES_REMOVE + SYSTEM_DLKM_MODULES,
     system_dlkm_modules_load = ["kernel/" + m for m in SYSTEM_DLKM_MODULES] + [""],
-    build_config = ":oppen_build_config",
+    build_config = ":yuna_build_config",
     kmi_symbol_list = "//vendor/amlogic/kernel:android/abi_gki_aarch64_amlogic",
     kernel_modules = [
         ":gpu_bifrost",
@@ -36,11 +36,11 @@ amlogic_kernel_platform(
 )
 
 kernel_build_config(
-    name = "oppen_build_config",
+    name = "yuna_build_config",
     srcs = [
         # do not sort
         "//vendor/amlogic/kernel:set_kernel_dir_build_config",
         "//vendor/amlogic/kernel:build.config.gki.aarch64",
-        "build.config.oppen",
+        "build.config.yuna",
     ],
 )
